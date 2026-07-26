@@ -5,6 +5,8 @@ import { remark } from 'remark';
 import { visit } from 'unist-util-visit';
 import GithubSlugger from 'github-slugger';
 import { toString } from 'mdast-util-to-string';
+import type { Node } from 'unist';
+import type { Heading } from 'mdast';
 
 const GUIDES_DIR = path.join(process.cwd(), 'content/guides');
 
@@ -14,7 +16,7 @@ export interface GuideMeta {
   date: string;
   category?: string;
   order?: number;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface TocItem {
@@ -61,7 +63,7 @@ export async function getGuideBySlug(slug: string): Promise<Guide | null> {
     const toc = await extractToc(content);
 
     return { meta, content, toc };
-  } catch (err) {
+  } catch {
     return null;
   }
 }
@@ -86,13 +88,12 @@ export async function getAllGuidesMeta(): Promise<GuideMeta[]> {
   });
 }
 
-
 async function extractToc(content: string): Promise<TocItem[]> {
   const toc: TocItem[] = [];
   const slugger = new GithubSlugger();
 
-  const processor = remark().use(() => (tree) => {
-    visit(tree, 'heading', (node: any) => {
+  const processor = remark().use(() => (tree: Node) => {
+    visit(tree, 'heading', (node: Heading) => {
       // Only extract h2 and h3 for TOC
       if (node.depth === 2 || node.depth === 3) {
         // Get text content of the heading
