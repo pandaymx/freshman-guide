@@ -19,7 +19,7 @@ export function ModeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="fixed top-4 right-4 p-2 rounded-full bg-blue-100 dark:bg-indigo-900 text-blue-600 dark:text-indigo-300 hover:bg-blue-200 dark:hover:bg-indigo-800 transition-colors z-50"
+      className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
       aria-label="Toggle theme"
     >
       <Sun className="h-5 w-5 hidden dark:block" />
