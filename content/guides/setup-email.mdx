@@ -1,0 +1,37 @@
+---
+title: "Setting Up Your Student Email"
+date: "2023-09-02"
+category: "Accounts"
+order: 2
+---
+
+Your student email is your primary method of communication with the university.
+
+## Accessing Webmail
+
+You can access your email via the web portal at `webmail.university.edu`.
+
+## Setting up IMAP/SMTP
+
+If you prefer to use a client like Outlook or Thunderbird, use these settings:
+
+### IMAP (Incoming)
+- **Server**: `imap.university.edu`
+- **Port**: 993 (SSL/TLS)
+
+### SMTP (Outgoing)
+- **Server**: `smtp.university.edu`
+- **Port**: 465 (SSL/TLS)
+- **Authentication**: Yes (same as incoming)
+
+Here's a simple python script if you want to test the connection using code:
+
+```python
+import imaplib
+
+mail = imaplib.IMAP4_SSL('imap.university.edu')
+mail.login('student_id@university.edu', 'password')
+mail.list()
+# Out: list of "folders" aka labels in gmail.
+mail.select("inbox") # connect to inbox.
+```
