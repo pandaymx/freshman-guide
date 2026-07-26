@@ -1,5 +1,6 @@
 import * as React from "react";
 import { schoolConfig } from "@/lib/school.config";
+import { withBase } from "@/lib/site.config";
 
 type ResolvedVariant = "combined" | "split";
 
@@ -36,9 +37,9 @@ export function SchoolLogo({
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img
-        src={combinedSrc}
+        src={withBase(combinedSrc)}
         alt={name}
-        className={`h-8 w-auto sm:h-9 ${className}`}
+        className={`h-10 w-auto sm:h-12 ${className}`}
       />
     );
   }
@@ -47,7 +48,7 @@ export function SchoolLogo({
     <span className={`flex items-center gap-2 ${className}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={iconSrc}
+        src={withBase(iconSrc)}
         alt=""
         aria-hidden="true"
         className={iconClassName ?? "h-8 w-8 sm:h-9 sm:w-9"}
