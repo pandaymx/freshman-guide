@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { ModeToggle } from "./ModeToggle";
+import { SchoolLogo } from "./SchoolLogo";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -23,21 +24,8 @@ export function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo and Branding */}
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-600 dark:text-indigo-400 group-hover:text-indigo-500 transition-colors relative">
-                {/* Inline SVG reference to school.svg or direct img. Using Next Image for optimization */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/school.svg"
-                  alt="School Logo"
-                  className="w-full h-full text-indigo-600 dark:invert dark:opacity-80"
-                  style={{ filter: 'var(--logo-filter, none)' }}
-                  aria-hidden="true"
-                />
-              </div>
-              <span className="font-bold text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white">
-                清华大学
-              </span>
+            <Link href="/" className="flex items-center group">
+              <SchoolLogo />
             </Link>
           </div>
 
