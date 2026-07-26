@@ -1,0 +1,46 @@
+---
+title: "How to Connect to Campus Wi-Fi"
+date: "2023-09-01"
+category: "Network"
+order: 1
+---
+
+Welcome to the campus! Connecting to the campus Wi-Fi is one of the first things you should do.
+
+## Quick Connection
+
+If you are using a modern OS, simply select the `Campus-Net` from your Wi-Fi list and log in using your student ID and password.
+
+## CLI Network Setup (For Linux Users)
+
+For those using Linux or custom setups, you can connect via the command line interface. Here are the steps:
+
+### Using nmcli
+
+1. Check available networks:
+   ```bash
+   nmcli d wifi list
+   ```
+2. Connect to the network:
+   ```bash
+   nmcli d wifi connect Campus-Net password your_password
+   ```
+
+### Troubleshooting
+
+- Check if your proxy is blocking the authentication page.
+- Make sure your MAC address is registered in the IT portal.
+
+## Supported Devices
+
+| Device | Supported | Notes |
+| :--- | :--- | :--- |
+| Laptops | Yes | All major OS supported |
+| Smartphones | Yes | iOS and Android |
+| Smart TVs | No | Please use the wired connection for smart TVs |
+
+## Next Steps
+
+- [x] Connect to Wi-Fi
+- [ ] Set up student email
+- [ ] Log in to the learning portal
