@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, CheckSquare, Map, HelpCircle } from "lucide-react";
+import { BookOpen, CheckSquare, Map, HelpCircle, Bus } from "lucide-react";
 
 interface ShortcutCardProps {
   title: string;
@@ -14,6 +14,12 @@ const shortcuts: ShortcutCardProps[] = [
     description: "了解报到流程与注意事项",
     icon: <BookOpen className="h-8 w-8" />,
     href: "/guide",
+  },
+  {
+    title: "接站指引",
+    description: "迎新接站大巴路线及站点安排",
+    icon: <Bus className="h-8 w-8" />,
+    href: "/transit",
   },
   {
     title: "物品清单",
@@ -39,7 +45,7 @@ export function ShortcutCards() {
   return (
     <div className="w-full">
       <h2 className="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-100">快捷入口</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {shortcuts.map((shortcut) => (
           <Link
             key={shortcut.title}
