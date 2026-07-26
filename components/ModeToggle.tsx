@@ -6,15 +6,6 @@ import { useTheme } from "next-themes";
 
 export function ModeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
 
   const toggleTheme = () => {
     console.log("Current theme:", theme, "Resolved:", resolvedTheme);

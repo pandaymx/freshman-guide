@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
 import { AlertCircle, X } from "lucide-react";
 
 interface Announcement {
@@ -18,21 +18,44 @@ const announcementsData: Announcement[] = [
   },
 ];
 
-export function AnnouncementBoard() {
-  const [visibleAnnouncements, setVisibleAnnouncements] = useState<Announcement[]>([]);
+const EMPTY_ANNOUNCEMENTS: Announcement[] = [];
 
-  useEffect(() => {
-    // Only run on client
-    const currentAnnouncements = announcementsData.filter((announcement) => {
-      const dismissed = sessionStorage.getItem(`dismissed-${announcement.id}`);
-      return dismissed !== "true";
-    });
-    setVisibleAnnouncements(currentAnnouncements);
-  }, []);
+let cachedSnapshot: Announcement[] = EMPTY_ANNOUNCEMENTS;
+let cachedKey = "";
+const listeners = new Set<() => void>();
+
+function getVisibleAnnouncements(): Announcement[] {
+  const key = announcementsData
+    .map((a) => sessionStorage.getItem(`dismissed-${a.id}`) ?? "")
+    .join("|");
+  if (key !== cachedKey) {
+    cachedKey = key;
+    cachedSnapshot = announcementsData.filter(
+      (a) => sessionStorage.getItem(`dismissed-${a.id}`) !== "true"
+    );
+  }
+  return cachedSnapshot;
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
+function dismissAnnouncement(id: string) {
+  sessionStorage.setItem(`dismissed-${id}`, "true");
+  listeners.forEach((listener) => listener());
+}
+
+export function AnnouncementBoard() {
+  const visibleAnnouncements = useSyncExternalStore(
+    subscribe,
+    getVisibleAnnouncements,
+    () => EMPTY_ANNOUNCEMENTS
+  );
 
   const handleDismiss = (id: string) => {
-    sessionStorage.setItem(`dismissed-${id}`, "true");
-    setVisibleAnnouncements((prev) => prev.filter((a) => a.id !== id));
+    dismissAnnouncement(id);
   };
 
   if (visibleAnnouncements.length === 0) {
