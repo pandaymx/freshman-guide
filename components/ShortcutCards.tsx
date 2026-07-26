@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, CheckSquare, Map, HelpCircle, Bus } from "lucide-react";
+import { BookOpen, CheckSquare, Map, HelpCircle, Bus, Users } from "lucide-react";
 
 interface ShortcutCardProps {
   title: string;
@@ -38,6 +38,12 @@ const shortcuts: ShortcutCardProps[] = [
     description: "解答你对大学生活的疑惑",
     icon: <HelpCircle className="h-8 w-8" />,
     href: "/faq",
+  },
+  {
+    title: "校园群聊",
+    description: "寻找新生组织，认识新同学",
+    icon: <Users className="h-8 w-8" />,
+    href: "/groups",
   },
 ];
 

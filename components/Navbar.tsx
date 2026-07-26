@@ -16,6 +16,7 @@ export function Navbar() {
   const navLinks = [
     { href: "/guide", label: "新生指南" },
     { href: "/checklist", label: "任务清单" },
+    { href: "/groups", label: "校园群聊" },
   ];
 
   return (
